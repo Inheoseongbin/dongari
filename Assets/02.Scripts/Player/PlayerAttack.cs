@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    #region Casting
+    public GameObject Casting;
+    public GameObject CastingEnd;
+    #endregion
+
     #region Attack1
     public Transform attack1Pos;
     public GameObject attack1Prefab;
@@ -19,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        Attack();       
+        Attack();
     }
 
     public virtual void AimWeapon(Vector2 pointerPos)
@@ -35,6 +40,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            StartCoroutine(Cast());
             _isAttack1 = true;
         }
 
@@ -44,9 +50,16 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    private IEnumerator Cast()
+    {
+        Instantiate(Casting, transform);
+        yield return new WaitForSeconds(3);
+        Instantiate(CastingEnd, transform);
+    }
+
     private IEnumerator Attack1()
     {
-        Instantiate(attack1Prefab, attack1Pos);
+        Instantiate(attack1Prefab, transform);
         _isAttack1 = false;
         yield return null;
     }
