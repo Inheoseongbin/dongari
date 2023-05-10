@@ -6,7 +6,7 @@ using UnityEngine;
 public class NavAgent : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 5f;
+    private float _speed = 2f;
     [SerializeField]
     private bool _cornerCheck = false;
 
@@ -44,7 +44,7 @@ public class NavAgent : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             pos.z = 0;
